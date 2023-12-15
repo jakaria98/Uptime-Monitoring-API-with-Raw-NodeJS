@@ -7,20 +7,30 @@ Author: Jakaria Hossain
 // Dependencies
 const http = require('http');
 const { handleReqRes } = require('./helpers/handleReqRes');
-
+const environment = require('./helpers/environments');
+const data = require('./lib/data');
+const lib = require('./lib/data');
 // app object - module scaffolding
 const app = {};
-
-// configuration
-app.config = {
-    port: 3000,
-};
-
+// testing file system
+// @TODO delete this
+data.create('test', 'newFile', { name: 'Bangladesh', language: 'Bangla' }, (err) => {
+    console.log(`Error was `, err);
+});
+data.read('test', 'newFile', (err, data) => {
+    console.log(`Error was `, err, ` and data is `, data);
+});
+data.update('test', 'newFile', { name: 'America', language: 'English' }, (err) => {
+    console.log(`Error was `, err);
+});
+lib.delete('test', 'newFile', (err) => {
+    console.log(`Error was `, err);
+});
 // create server
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
-    server.listen(app.config.port, () => {
-        console.log(`Listening to port ${app.config.port}`);
+    server.listen(environment.port, () => {
+        console.log(`Listening to port ${environment.port}`);
     });
 };
 

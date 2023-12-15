@@ -9,6 +9,7 @@
     "prettier": "^3.1.1"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "NODE_ENV=staging nodemon index.js",
+    "production": "NODE_ENV=production nodemon index.js"
   }
 }
