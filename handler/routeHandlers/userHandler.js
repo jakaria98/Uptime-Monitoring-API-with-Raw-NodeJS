@@ -100,9 +100,9 @@ handler._users.get = (requestProperties, callback) => {
 handler._users.put = (requestProperties, callback) => {
     // check the phone number if valid
     const phone =
-        typeof requestProperties.body.phone === 'string' &&
-        requestProperties.body.phone.trim().length === 11
-            ? requestProperties.body.phone
+        typeof requestProperties.queryStringObject.phone === 'string' &&
+        requestProperties.queryStringObject.phone.trim().length === 11
+            ? requestProperties.queryStringObject.phone
             : false;
     // check optional fields
     const firstName =
@@ -167,14 +167,14 @@ handler._users.put = (requestProperties, callback) => {
 };
 handler._users.delete = (requestProperties, callback) => {
     // check the phone number if valid
+    console.log(requestProperties.queryStringObject);
     const phone =
-        typeof requestProperties.body.phone === 'string' &&
-        requestProperties.body.phone.trim().length === 11
-            ? requestProperties.body.phone
+        typeof requestProperties.queryStringObject.phone === 'string' &&
+        requestProperties.queryStringObject.phone.trim().length === 11
+            ? requestProperties.queryStringObject.phone
             : false;
     if (phone) {
         // lookup the user
-        console.log(phone);
         data.read('users', phone, (err1, uData) => {
             if (!err1 && uData) {
                 data.delete('users', phone, (err2) => {
@@ -196,7 +196,7 @@ handler._users.delete = (requestProperties, callback) => {
         });
     } else {
         callback(400, {
-            error: 'There was a problem in your request!',
+            error: 'Invalid Number, Please try again!',
         });
     }
 };
