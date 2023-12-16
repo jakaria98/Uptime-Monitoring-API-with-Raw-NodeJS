@@ -2,7 +2,7 @@
 const data = require('../../lib/data');
 const { hash } = require('../../helpers/utilities');
 const { parseJSON } = require('../../helpers/utilities');
- // module scaffolding
+// module scaffolding
 
 const handler = {};
 handler.userHandler = (requestProperties, callback) => {
@@ -12,7 +12,7 @@ handler.userHandler = (requestProperties, callback) => {
     } else {
         callback(405);
     }
-}
+};
 handler._users = {};
 handler._users.post = (requestProperties, callback) => {
     const firstName =
@@ -153,19 +153,51 @@ handler._users.put = (requestProperties, callback) => {
                         error: 'You have a problem in your request',
                     });
                 }
-            }); 
+            });
         } else {
             callback(400, {
                 error: 'You have a problem in your request',
             });
         }
     } else {
-        callback(400,{
+        callback(400, {
             error: 'invalid phone number, please try again!',
         });
     }
 };
 handler._users.delete = (requestProperties, callback) => {
-    callback(200);
+    // check the phone number if valid
+    const phone =
+        typeof requestProperties.body.phone === 'string' &&
+        requestProperties.body.phone.trim().length === 11
+            ? requestProperties.body.phone
+            : false;
+    if (phone) {
+        // lookup the user
+        console.log(phone);
+        data.read('users', phone, (err1, uData) => {
+            if (!err1 && uData) {
+                data.delete('users', phone, (err2) => {
+                    if (!err2) {
+                        callback(200, {
+                            message: 'User was successfully deleted!',
+                        });
+                    } else {
+                        callback(500, {
+                            error: 'There was a server side error!',
+                        });
+                    }
+                });
+            } else {
+                callback(500, {
+                    error: 'There was a server side error!',
+                });
+            }
+        });
+    } else {
+        callback(400, {
+            error: 'There was a problem in your request!',
+        });
+    }
 };
 module.exports = handler;
