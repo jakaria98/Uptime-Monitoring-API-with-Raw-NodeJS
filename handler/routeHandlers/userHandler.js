@@ -1,3 +1,8 @@
+/**
+ * Title: User Handler
+ * Description: Handler to handle user defined users
+ * Author: Jakaria Hossain
+ */
 //dependencies
 const data = require('../../lib/data');
 const { hash } = require('../../helpers/utilities');

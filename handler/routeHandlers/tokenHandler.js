@@ -1,8 +1,13 @@
-//dependencies
+/**
+ * Title: Token Handler
+ * Description: Handler to handle user defined tokens
+ * Author: Jakaria Hossain
+ */
+//dependencies (nodejs core module)
 const data = require('../../lib/data');
 const { hash } = require('../../helpers/utilities');
 const { parseJSON } = require('../../helpers/utilities');
-const { createRandomString } = require('../../helpers/utilities'); 
+const { createRandomString } = require('../../helpers/utilities');
 // module scaffolding
 
 const handler = {};
@@ -90,8 +95,7 @@ handler._token.put = (requestProperties, callback) => {
             ? requestProperties.body.id
             : false;
     const extend =
-        typeof requestProperties.body.extend === 'boolean' &&
-        requestProperties.body.extend === true
+        typeof requestProperties.body.extend === 'boolean' && requestProperties.body.extend === true
             ? true
             : false;
     if (id && extend) {
@@ -157,10 +161,7 @@ handler._token.delete = (requestProperties, callback) => {
 handler._token.verify = (id, phone, callback) => {
     data.read('tokens', id, (err, tokenData) => {
         if (!err && tokenData) {
-            if (
-                parseJSON(tokenData).phone === phone &&
-                parseJSON(tokenData).expires > Date.now()
-            ) {
+            if (parseJSON(tokenData).phone === phone && parseJSON(tokenData).expires > Date.now()) {
                 callback(true);
             } else {
                 callback(false);

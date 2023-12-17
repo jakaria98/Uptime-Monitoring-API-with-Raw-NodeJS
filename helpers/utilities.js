@@ -1,3 +1,9 @@
+/**
+ * Title: Utilities
+ * Description: Important utility functions
+ * Author: Jakaria Hossain
+ */
+// dependencies
 const crypto = require('crypto');
 const config = require('../.env');
 // module scaffolding

@@ -1,3 +1,10 @@
+/**
+ * Title: Handle Request Response
+ * Description: Handle Request Response
+ * Author: Jakaria Hossain
+ */
+
+// dependencies
 const url = require('url');
 const { StringDecoder } = require('string_decoder');
 const routes = require('../routes');
