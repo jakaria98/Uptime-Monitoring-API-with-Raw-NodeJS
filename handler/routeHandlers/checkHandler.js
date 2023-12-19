@@ -346,3 +346,4 @@ handler._check.delete = (requestProperties, callback) => {
         });
     }
 };
+module.exports = handler;
