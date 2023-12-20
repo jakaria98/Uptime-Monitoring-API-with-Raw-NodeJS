@@ -1,6 +1,6 @@
 UPTIME MONITORING API
 
-Clone this repository from https://github.com/jakaria98/Uptime-Monitoring-API-with-Raw-NodeJS.giy\t
+Clone this repository from https://github.com/jakaria98/Uptime-Monitoring-API-with-Raw-NodeJS.git
 
 install dependencies and dev tools
 
